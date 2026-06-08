@@ -1,0 +1,13 @@
+# Lock Qualcomm remoteproc power domains (prevent autosuspend chaos)
+
+ACTION=="add", SUBSYSTEM=="power", KERNEL=="genpd:0:4080000.remoteproc", \
+    RUN+="/bin/sh -c 'echo on > /sys/devices/genpd:0:4080000.remoteproc/power/control'"
+
+ACTION=="add", SUBSYSTEM=="power", KERNEL=="genpd:1:4080000.remoteproc", \
+    RUN+="/bin/sh -c 'echo on > /sys/devices/genpd:1:4080000.remoteproc/power/control'"
+
+ACTION=="add", SUBSYSTEM=="power", KERNEL=="genpd:0:a204000.remoteproc", \
+    RUN+="/bin/sh -c 'echo on > /sys/devices/genpd:0:a204000.remoteproc/power/control'"
+
+ACTION=="add", SUBSYSTEM=="power", KERNEL=="genpd:1:a204000.remoteproc", \
+    RUN+="/bin/sh -c 'echo on > /sys/devices/genpd:1:a204000.remoteproc/power/control'"
