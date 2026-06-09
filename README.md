@@ -5,3 +5,9 @@ Some changes includes:
 2. set anything going out of the WWAN to be 65, effectively bypassed tether.
 
 the normal logic such as NAT is still intact.
+
+## dependencies
+1. dnsmasq (DHCP+dns)
+2. Adguard `dnsproxy`
+3. `hostapd`
+4. NetworkManager+ModemManager
