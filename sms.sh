@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 NTFY_TOPIC="mysms123"
 NTFY_URL="https://ntfy.sh/${NTFY_TOPIC}"
