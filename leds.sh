@@ -22,17 +22,24 @@ G_LP=$B/$G_N
 G_B=$G_LP/brightness
 G_T=$G_LP/trigger
 
+# state
+WAN_STATE=
+WLAN_STATE=
+
 # reset
 echo none | tee $R_T | tee $B_T | tee $G_T
 echo 0 | tee $R_B | tee $B_B | tee $G_B
 
-WAN_STATE=
 wan_up() {
 	[ "$WAN_STATE" != "down" ] && return
 	WAN_STATE=up
 	echo 0 > $R_B
 	echo panic > $R_T # turn red LED off, only ON when panic
-	echo phy0tx > $G_T # make green LED blink on transmit
+	if [ "$WLAN_STATE" == "up" ]; then
+		echo phy0tx > $G_T # make green LED blink on transmit
+	else
+		echo usb-gadget > $G_T # make green LED blink on usb gadget activities
+	fi
 }
 
 wan_down() {
@@ -43,7 +50,6 @@ wan_down() {
 	echo timer > $R_T # make red blink
 }
 
-WLAN_STATE=
 wlan_up() {
 	[ "$WLAN_STATE" == "up" ] && return
 	WLAN_STATE=up
@@ -57,6 +63,8 @@ wlan_down() {
 	WLAN_STATE=down
 	echo none > $B_T
 	echo 0 > $B_B
+	[ "$WAN_STATE" == "down" ] && return
+	echo usb-gadget > $G_T
 }
 
 check() {
