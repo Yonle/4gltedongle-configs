@@ -12,3 +12,4 @@ the normal logic such as NAT is still intact.
 2. Adguard `dnsproxy`
 3. `hostapd`
 4. NetworkManager+ModemManager
+5. `irqbalance`
